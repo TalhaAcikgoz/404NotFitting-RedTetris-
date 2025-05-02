@@ -1,34 +1,70 @@
 const express = require('express');
 const authRouter = express.Router();
 const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 require('dotenv').config();
 
 const SECRET_KEY = process.env.JWT_SECRET || 'SUpERsecRET';
-authRouter.get('/getToken', (req, res) => {
-    try {
-        res.status(200).send(jwt.sign({'username': 'gangbi', 'password':'t123'}, SECRET_KEY, {expiresIn: '1m'}))
-    } catch (e) {
-        res.status(400).send(e);
-    }
-});
 
-const verify = (req, res, next) => {
-    const token = req.headers['authorization'];
-    console.log(token);
-    if (!token) {
-        return res.status(403).json({'msg':'Token gerekli!'});
+// JWT oluşturma fonksiyonu
+const generateToken = (username) => {
+    return jwt.sign({ username: username }, SECRET_KEY, { expiresIn: '1h' });
+};
+
+// Giriş yapma fonksiyonu
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+    } catch {}
+
+    // Kullanıcıyı veritabanında bul
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return res.status(401).json({ message: 'Geçersiz e-posta veya şifre' });
     }
-    jwt.verify(token, SECRET_KEY, (err, decoded) => {
-        console.log('decoded', decoded);
-        if (err) {
-            return res.status(401).json({'msg':`Error: ${err}`});
-        }
-        req.user = decoded;
-        next();
+
+    // Şifreyi kontrol et
+    const isMatch = await user.matchPassword(password);
+
+    if (!isMatch) {
+        return res.status(401).json({ message: 'Geçersiz e-posta veya şifre' });
+    }
+
+    // JWT token oluştur
+    const token = generateToken(user._id);
+
+    return res.status(200).json({
+        message: 'Başarıyla giriş yapıldı',
+        token
     });
+};
+
+authRouter.post('/', login);
+
+// Token doğrulama middleware'i
+const protect = (req, res, next) => {
+    let token;
+
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        token = req.headers.authorization.split(' ')[1];
+    }
+
+    if (!token) {
+        return res.status(401).json({ message: 'Token bulunamadı, giriş yapın.' });
+    }
+
+    try {
+        // Token'ı doğrula
+        const decoded = jwt.verify(token, 'secretKey');
+        req.user = decoded.id; // Kullanıcı ID'sini request'e ekle
+        next();
+    } catch (error) {
+        return res.status(401).json({ message: 'Geçersiz token' });
+    }
 };
 
 module.exports = {
     authRouter,
-    verify
+    protect
 };

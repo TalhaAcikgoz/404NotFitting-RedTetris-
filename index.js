@@ -32,7 +32,7 @@ const {authRouter}  = require('./routes/auth.js');
 
 app.use('/users', usersRouter);
 app.use('/database', databaseRouter);
-app.use('/auth', authRouter);
+app.use('/login', authRouter);
 
 app.listen(port, () => {
     console.log(`Now listening on port http://localhost:${port}`);

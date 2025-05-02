@@ -3,13 +3,13 @@ const router = express.Router();
 const { MongoClient } = require('mongodb');
 const { collection } = require('../models/User');
 require('dotenv').config();
-const { verify } = require('./auth.js')
+const { protect } = require('./auth.js')
 
 const databaseName = process.env.databaseName;
 const uri = `${process.env.BaseDatabaseUrl}/${databaseName}`;
 const client = new MongoClient(uri);
 
-router.get('/collections', verify, async (req, res) => {
+router.get('/collections', protect, async (req, res) => {
     try {
         await client.connect();
         const db = client.db(databaseName);
