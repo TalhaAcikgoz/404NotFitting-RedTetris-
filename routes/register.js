@@ -3,20 +3,6 @@ const User = require('../models/User.js')
 const { generateToken } = require('./login.js')
 const router = express.Router()
 
-const me = async (req, res) => {
-    const { user } = req.params
-
-    if (!user) {
-        res.status(404).json({message: ''})
-    }
-    const myUser = await User.findOne({username : user});
-
-    if (!myUser) {
-        res.status(404).json({message: 'User bulunamadi!?!??!'});
-    }
-    res.send("User List", {ulist: "none"});
-}
-
 // Yeni kullanıcı oluşturma endpoint’i
 const register = async (req, res) => {
     const { username, email, password } = req.body;
@@ -50,7 +36,7 @@ const register = async (req, res) => {
     }
 }
 
-router.get('/me/:user', me);
+
 router.post('/register', register);
 
 module.exports = router
