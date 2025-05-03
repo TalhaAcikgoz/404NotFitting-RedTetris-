@@ -15,6 +15,7 @@ mongoose.connect(mongoURI)
 .catch(err => console.log("MongoDB baglanti hatasi:", err));
 
 app.use(express.static(__dirname + '/public'));
+app.use(express.json());
 
 // MIDDLEWARES
 

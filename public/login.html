@@ -37,17 +37,20 @@
 			</div>
 			<div class="col-4 mx-auto " id="loginCol">
 				<h1 class="m-3 mb-0">Login RedTetris</h1>
-				<div class="row">
-					<div class="form-group mt-5">
+				<div class="row form-group">
+					<div class="mt-5">
+						<label id="loginErrLabel" for="" class="" style="color: #c53211;"></label>
+					</div>
+					<div class="">
 						<label for="usernameInputExample" class="mb-1">Username</label>
 						<input class="form-control" type="text" name="username" placeholder="Enter username!" id="usernameInput">
 					</div>
-					<div class="form-group mt-3">
+					<div class="mt-3">
 						<label for="passwordInputExample" class="mb-1">Password</label>
 						<input class="form-control" type="password" name="password" placeholder="Enter password!" id="passwordInput">
 					</div>
 					<div class="col-md-12 mt-3 mb-3 text-center ">
-						<button id="loginSubmitBtn" type="submit" class="col-md-10 btn  ">Login</button>
+						<button onclick="Login()" id="loginSubmitBtn" type="submit" class="col-md-10 btn  ">Login</button>
 				 </div>
 				</div>
 				<div class="d-flex align-items-center">
