@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<header>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>My Project</title>
+  <link rel="stylesheet" href="/bootstrap.min.css">
+	<style>
+		:root {
+			--icold:		#a0d2eb		;
+			--fpurple:		#e5eaf5		;
+			--mpurple:		#d0bdf4		;
+			--ppurple:		#8458B3		;
+			--hpurple:		#a28089		;
+			--cred:			#c53211	    ;
+			--cdeepgray:	#2e3830	    ;
+			--khaki:		#e6dbc9	    ;
+            --googleGreen:  #34A853		;
+		}
+		body {
+			background-color: var(--khaki);
+			color:var(--khaki);
+		}
+		#loginCol {
+			background-color: var(--cdeepgray);
+			border-radius: 10px;
+		}
+		#loginSubmitBtn {
+			background-color: var(--cred);
+			border-color: var(--ppurple);
+		}
+        .redColorTheme {
+            color: var(--cred);
+        }
+	</style>
+</header>
+
+<body>
+	<div class="container" id="mainContainer" >
+		<div class="row mt-5" id="mainRow">
+			<div class="col">
+
+			</div>
+			<div class="col-4 mx-auto " id="loginCol">
+				<h1 class="m-3 mb-0">Register RedTetris</h1>
+				<div class="row form-group">
+					<div class="mt-4">
+						<label id="registerErrLabel" for="" class="redColorTheme " ></label>
+					</div>
+					<div class="">
+						<label for="usernameInputExample" class="mb-1">Username</label>
+						<input class="form-control" type="text" name="username" placeholder="Enter username!" id="usernameInput">
+					</div>
+                    <div class="mt-3">
+						<label for="emailInputExample" class="mb-1">E-mail</label>
+						<input class="form-control" type="text" name="email" placeholder="Enter e-mail!" id="emailInput">
+					</div>
+					<div class="mt-3">
+						<label for="passwordInputExample" class="mb-1">Password</label>
+						<input class="form-control" type="password" name="password" placeholder="Enter password!" id="passwordInput">
+					</div>
+					<div class="col-md-12 mt-3 mb-3 text-center ">
+						<button onclick="register()" id="loginSubmitBtn" type="submit" class="col-md-10 btn  ">Register</button>
+                    </div>
+				</div>
+				<div class="d-flex align-items-center">
+					<div class="flex-grow-1">
+						<hr class="">
+					</div>
+					<span class="px-2">register</span>
+					<div class="flex-grow-1">
+						<hr class="">
+					</div>
+                </div>
+                <div class="mx-auto mb-3 text-center">
+                    <a onclick="redirectToLogin()" class="btn btn-link">Already have an account?</a>
+                </div>
+			</div>
+			<div class="col">
+
+			</div>
+		</div>
+	</div>
+	<script src="/bootstrap.bundle.min.js"></script>
+	<script src="/login.js">
+		
+	</script>
+</body>
+
+<footer>
+
+</footer>

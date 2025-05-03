@@ -13,22 +13,24 @@ const generateToken = (username) => {
 
 // Giriş yapma fonksiyonu
 const login = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-    } catch {}
+    const { username, password } = req.body;
+
+    if (username == '' || password == '') {
+        return res.status(400).json({error: 1, message: 'Username or password empty.' });
+    }
 
     // Kullanıcıyı veritabanında bul
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ username: username });
 
     if (!user) {
-        return res.status(401).json({ message: 'Geçersiz e-posta veya şifre' });
+        return res.status(401).json({error: 1, message: 'Boyle bir kullanici bulunamadi' });
     }
 
     // Şifreyi kontrol et
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
-        return res.status(401).json({ message: 'Geçersiz e-posta veya şifre' });
+        return res.status(401).json({error:1, message: 'Geçersiz username veya şifre' });
     }
 
     // JWT token oluştur
@@ -36,24 +38,22 @@ const login = async (req, res) => {
 
     return res.status(200).json({
         message: 'Başarıyla giriş yapıldı',
-        token
+        token: token,
     });
 };
-
-authRouter.post('/', login);
 
 // Token doğrulama middleware'i
 const protect = (req, res, next) => {
     let token;
-
+    
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1];
     }
-
+    
     if (!token) {
         return res.status(401).json({ message: 'Token bulunamadı, giriş yapın.' });
     }
-
+    
     try {
         // Token'ı doğrula
         const decoded = jwt.verify(token, 'secretKey');
@@ -64,7 +64,10 @@ const protect = (req, res, next) => {
     }
 };
 
+authRouter.post('/', login);
+
 module.exports = {
     authRouter,
-    protect
+    protect,
+    generateToken
 };

@@ -3,7 +3,7 @@ const router = express.Router();
 const { MongoClient } = require('mongodb');
 const { collection } = require('../models/User');
 require('dotenv').config();
-const { protect } = require('./auth.js')
+const { protect } = require('./login.js')
 
 const databaseName = process.env.databaseName;
 const uri = `${process.env.BaseDatabaseUrl}/${databaseName}`;

@@ -16,6 +16,7 @@ mongoose.connect(mongoURI)
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
+const port = 3000;
 
 // MIDDLEWARES
 
@@ -26,14 +27,15 @@ logging = (req, res, next) => {
 
 app.use(logging);
 
-const port = 3000;
 const databaseRouter = require('./routes/Database.js');
-const usersRouter = require('./routes/users.js');
-const {authRouter}  = require('./routes/auth.js');
+const usersRouter = require('./routes/register.js');
+const {authRouter, protect}  = require('./routes/login.js');
 
-app.use('/users', usersRouter);
-app.use('/database', databaseRouter);
 app.use('/login', authRouter);
+app.use('/users', usersRouter);
+app.use(protect)
+
+app.use('/database', databaseRouter);
 
 app.listen(port, () => {
     console.log(`Now listening on port http://localhost:${port}`);
