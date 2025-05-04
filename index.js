@@ -27,14 +27,16 @@ logging = (req, res, next) => {
 
 app.use(logging);
 
-const databaseRouter = require('./routes/Database.js');
-const usersRouter = require('./routes/register.js');
+const databaseRouter = require('./routes/database.js');
+const usersRouter = require('./routes/user.js');
 const {authRouter, protect}  = require('./routes/login.js');
+const registerRouter = require('./routes/route.js');
 
 app.use('/login', authRouter);
-app.use('/users', usersRouter);
+app.use('/register', registerRouter);
 app.use(protect)
 
+app.use('/users', usersRouter);
 app.use('/database', databaseRouter);
 
 app.listen(port, () => {

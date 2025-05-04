@@ -18,3 +18,5 @@ const me = async (req, res) => {
 }
 
 router.get('/me/:user', protect, me);
+
+module.exports = router
