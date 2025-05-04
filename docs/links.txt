@@ -14,3 +14,9 @@ https://roystack.home.blog/2019/10/22/node-clean-architecture-deep-dive/
 
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 Robert Martin (uncle bob) write this. Who invented clean architecture.
+
+https://medium.com/goturkiye/domain-driven-design-ddd-nedir-750dc6c9641b
+DDD explanation
+
+https://medium.com/@berkaybasoz/cqrs-command-query-responsibility-segregation-nedir-fd94882f195e
+CQRS explanation
