@@ -36,7 +36,6 @@ const register = async (req, res) => {
     }
 }
 
-
-router.post('/register', register);
-
-module.exports = router
+module.exports = {
+    register
+}
