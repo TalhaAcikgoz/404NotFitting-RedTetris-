@@ -1,0 +1,16 @@
+
+https://github.com/jasontaylordev/CleanArchitecture
+
+https://www.youtube.com/watch?v=dK4Yb6-LxAk
+Clean Architecture with ASP.NET Core 3.0 • Jason Taylor • GOTO 2019
+explain clean Architecture with .net 
+https://jasontaylor.dev/clean-architecture-getting-started/
+Clean arch explanation who did github repo
+
+https://mannhowie.com/clean-architecture-node
+
+https://github.com/panagiop/node.js-clean-architecture
+https://roystack.home.blog/2019/10/22/node-clean-architecture-deep-dive/
+
+https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
+Robert Martin (uncle bob) write this. Who invented clean architecture.
